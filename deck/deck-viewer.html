@@ -128,6 +128,10 @@
   .thumb-num { font-size: 9px; font-weight: 700; letter-spacing: 0.05em; color: var(--terracotta-tint); }
   .thumb-label { font-size: 10.5px; line-height: 1.3; color: rgba(255,255,255,0.65); margin-top: 2px; }
 </style>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -219,6 +223,7 @@
     prevBtn.disabled = current === 0;
     nextBtn.disabled = current === wraps.length - 1;
     history.replaceState(null, '', '#' + (current + 1));
+    va('event', { name: 'slide_view', data: { deck: 'strategi', slide: current + 1, total: wraps.length, label: wraps[current].dataset.label || '' } });
   }
 
   function goTo(i) {
