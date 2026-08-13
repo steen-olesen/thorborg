@@ -207,6 +207,13 @@
 
   let current = Math.max(0, Math.min(wraps.length - 1, parseInt(location.hash.slice(1), 10) - 1 || 0));
 
+  const verParam = new URLSearchParams(location.search).get('ver') || '';
+  function track(slide, total, label) {
+    const url = '/api/track?' + new URLSearchParams({ ver: verParam, deck: 'mockups', slide, total, label });
+    if (navigator.sendBeacon) navigator.sendBeacon(url);
+    else fetch(url, { keepalive: true }).catch(() => {});
+  }
+
   function render() {
     wraps.forEach((w, i) => w.classList.toggle('active', i === current));
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
@@ -217,6 +224,7 @@
     nextBtn.disabled = current === wraps.length - 1;
     history.replaceState(null, '', '#' + (current + 1));
     va('event', { name: 'slide_view', data: { deck: 'mockups', slide: current + 1, total: wraps.length, label: wraps[current].dataset.label || '' } });
+    track(current + 1, wraps.length, wraps[current].dataset.label || '');
   }
 
   function goTo(i) {
