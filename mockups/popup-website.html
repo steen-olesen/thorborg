@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Popup-mockup — hotelklippen.com med konkurrence-popup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #E9E9E0;
+    --dark: #2F2E2E;
+    --terracotta: #E37B5B;
+    --terracotta-deep: #C4623F;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; font-family: "Source Sans 3", Arial, sans-serif; }
+
+  .site {
+    position: fixed;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(30,28,25,0.18) 0%, rgba(30,28,25,0.30) 100%),
+      url('https://static.wixstatic.com/media/ff234e_f8894adc15d946dfb4e9bdd3f5ca0c87~mv2.png/v1/fill/w_1600,h_1200,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/hotel-havudsigt-bar.png') center 55% / cover no-repeat;
+  }
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 20px 40px;
+    background: rgba(233,233,224,0.94);
+  }
+  .site-nav .logo {
+    font-family: "Source Serif 4", serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dark);
+  }
+  .site-nav .menu {
+    display: flex;
+    gap: 26px;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--dark);
+  }
+  .site-nav .book-btn {
+    background: var(--terracotta);
+    color: white;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 2px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 600px) {
+    .site-nav { padding: 16px 20px; }
+    .site-nav .menu { display: none; }
+  }
+
+  /* --- Popup overlay --- */
+  .popup-overlay {
+    position: fixed; inset: 0;
+    background: rgba(20,18,16,0.35);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 50;
+    padding: 20px;
+  }
+  .popup {
+    position: relative;
+    width: 100%; max-width: 420px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+    color: var(--dark);
+    text-align: center;
+  }
+  .popup-close {
+    position: absolute; top: 12px; right: 14px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(255,255,255,0.75);
+    color: var(--dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; cursor: pointer; z-index: 2;
+    font-family: Arial, sans-serif;
+  }
+  .popup-close:hover { background: rgba(255,255,255,0.95); }
+  .popup-photo {
+    height: 170px;
+    background: linear-gradient(180deg, rgba(30,28,25,0.05) 0%, rgba(30,28,25,0.35) 100%), url('https://static.wixstatic.com/media/ff234e_f8894adc15d946dfb4e9bdd3f5ca0c87~mv2.png/v1/fill/w_1200,h_900,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/hotel-havudsigt-bar.png') center 50% / cover no-repeat;
+  }
+  .popup-body { padding: 26px 30px 30px; }
+  .popup-eyebrow {
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 600;
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 10px;
+  }
+  .popup h1 {
+    font-family: "Source Serif 4", serif;
+    font-size: 23px; font-weight: 400; line-height: 1.3;
+    margin: 0 0 10px;
+  }
+  .popup h1 em { font-style: normal; color: var(--terracotta); }
+  .popup p.sub {
+    font-size: 14px; font-weight: 300; color: #5b5a58; line-height: 1.5;
+    margin: 0 0 22px;
+  }
+  .popup a.submit {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: var(--terracotta);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .popup a.submit:hover { background: var(--terracotta-deep); }
+  .popup .dismiss {
+    display: block;
+    margin-top: 14px;
+    font-size: 12px;
+    color: #9a978d;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .mockup-tag {
+    position: fixed; top: 14px; left: 14px;
+    background: rgba(0,0,0,0.65); color: white;
+    font-family: Arial, sans-serif; font-size: 11px;
+    padding: 6px 10px; border-radius: 5px;
+    z-index: 100;
+  }
+  .mockup-tag .desktop-hint { display: none; }
+  @media (hover: none) {
+    .mockup-tag .desktop-hint { display: inline; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="site">
+    <div class="site-nav">
+      <div class="logo">Klippen Hotel</div>
+      <div class="menu"><span>Priser og pakketilbud</span><span>Hotellerne</span><span>Nyheder</span></div>
+      <div class="book-btn">Book her</div>
+    </div>
+  </div>
+
+  <div class="popup-overlay">
+    <div class="popup">
+      <div class="popup-close">&times;</div>
+      <div class="popup-photo"></div>
+      <div class="popup-body">
+        <div class="popup-eyebrow">Kun i en begrænset periode</div>
+        <h1>Vind <em>en nat</em><br>med udsigt over Østersøen</h1>
+        <p class="sub">Overnatning for 2 på Bornholms bedste udsigtsplads.</p>
+        <a class="submit" href="tilmelding.html">Deltag i konkurrencen</a>
+        <span class="dismiss">Nej tak, måske en anden gang</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup-tag">Disse mockups er blot eksempler<span class="desktop-hint"> · Opleves bedst på desktop</span></div>
+
+</body>
+</html>

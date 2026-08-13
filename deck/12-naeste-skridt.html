@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klippen Hotel — Næste skridt...?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="slide-base.css">
+<style>
+  .view { display: flex; flex-direction: column; width: 100%; }
+
+  .reaction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3em;
+    margin-top: 1.6em;
+  }
+  .reaction-row {
+    display: flex;
+    align-items: center;
+    gap: 1.4em;
+    padding: 1.3em 1.7em;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .reaction-row:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.25);
+  }
+  .reaction-row .num {
+    flex-shrink: 0;
+    width: 2.6em;
+    height: 2.6em;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(18px, 1.6vw, 22px);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    color: var(--grey-light);
+  }
+  .reaction-row h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--white);
+    font-size: clamp(18px, 1.7vw, 24px);
+    margin-bottom: 0.25em;
+  }
+  .reaction-row p {
+    font-family: var(--font-body);
+    color: var(--grey-light);
+    font-size: clamp(13.5px, 1.1vw, 16px);
+    line-height: 1.45;
+  }
+  .reaction-row .chevron {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-size: 22px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .back-btn {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    color: var(--grey-light);
+    font-family: var(--font-body);
+    font-size: clamp(12.5px, 1vw, 14px);
+    cursor: pointer;
+    margin-bottom: 1em;
+    padding: 0;
+  }
+  .back-btn:hover { color: var(--white); }
+
+  .result-view .slide-list { margin-top: 1.1em; max-width: 720px; }
+  .result-view .note-line {
+    margin-top: 1.1em;
+    font-family: var(--font-body);
+    font-size: clamp(13.5px, 1.1vw, 16px);
+    line-height: 1.5;
+    color: var(--grey-light);
+    max-width: 680px;
+  }
+  .result-view .cta-btn {
+    display: inline-block;
+    margin-top: 1.4em;
+    color: var(--terracotta-tint);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(15px, 1.2vw, 18px);
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="slide" data-slide="19" data-total="19">
+  <div class="slide-customer-name">Klippen Hotel</div>
+
+  <div id="view-choices" class="view">
+    <div class="slide-label">Sidste spørgsmål</div>
+    <h1 class="slide-headline">Næste skridt<span class="accent">...?</span></h1>
+
+    <div class="reaction-list">
+      <div class="reaction-row" onclick="showView('view-1')">
+        <div class="num">1</div>
+        <div>
+          <h3>"Jeg tror ikke, at BOOOST Metoden kan skaffe mig 1.000 nye potentielle kunder på 30 dage"</h3>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="reaction-row" onclick="showView('view-2')">
+        <div class="num">2</div>
+        <div>
+          <h3>"Jeg tror på BOOOST Metoden og gør det selv"</h3>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="reaction-row" onclick="showView('view-3')">
+        <div class="num">3</div>
+        <div>
+          <h3>"Jeg tror på BOOOST Metoden; hvordan kommer vi videre herfra?"</h3>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="view-1" class="view result-view" style="display:none;">
+    <button class="back-btn" onclick="showView('view-choices')">← Tilbage til de 3 muligheder</button>
+    <div class="slide-label">Skepsis er okay</div>
+    <h1 class="slide-headline">Fair nok — BOOOST metoden er <span class="accent">ikke for alle</span></h1>
+    <p class="note-line">Vores erfaring er, at BOOOST kan være udfordrende hvis:</p>
+    <ul class="slide-list">
+      <li><strong>Manglende opbakning fra kunderne</strong> — stor andel mindre gode anmeldelser.</li>
+      <li><strong>Manglende tro på egne kanaler</strong> — email/sms bruges ikke til kundepleje.</li>
+      <li><strong>Personalet er ikke med ombord</strong> — konkurrencen bliver aldrig nævnt for gæsterne.</li>
+      <li><strong>Der forventes omsætning i morgen</strong> — fremfor en database, man kan høste af fremadrettet.</li>
+    </ul>
+  </div>
+
+  <div id="view-2" class="view result-view" style="display:none;">
+    <button class="back-btn" onclick="showView('view-choices')">← Tilbage til de 3 muligheder</button>
+    <div class="slide-label">Også en gyldig vej</div>
+    <h1 class="slide-headline">Kanon — <span class="accent">god fornøjelse</span></h1>
+    <p class="note-line">Dejligt at I kan se mulighederne i BOOOST metoden. Får I brug for en sparringspartner undervejs, er I altid velkomne til at kontakte mig.</p>
+    <a class="cta-btn" href="mailto:steen@detmindrebureau.dk">Skriv til mig, hvis der dukker spørgsmål op →</a>
+  </div>
+
+  <div id="view-3" class="view result-view" style="display:none;">
+    <button class="back-btn" onclick="showView('view-choices')">← Tilbage til de 3 muligheder</button>
+    <div class="slide-label">Så lad os gøre det</div>
+    <h1 class="slide-headline">Godt — lad os lægge <span class="accent">den konkrete plan</span></h1>
+    <p class="note-line">Vi kortlægger de næste skridt sammen: hvornår konkurrencen går live, hvem der gør hvad, og hvordan I får mest muligt ud af den.</p>
+    <a class="cta-btn" href="https://detmindrebureau.dk/booking" target="_blank" rel="noopener">Book en opfølgning →</a>
+  </div>
+
+  <div class="slide-footer">Det Mindre Bureau</div>
+  <div class="slide-pagination">19 / 19</div>
+</div>
+
+<script>
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
+    document.getElementById(id).style.display = 'flex';
+  }
+</script>
+</body>
+</html>

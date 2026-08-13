@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klippen Hotel — 4,44 i snit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="slide-base.css">
+<style>
+  .stat-row {
+    display: flex;
+    align-items: center;
+    gap: 5vw;
+    margin-top: 1.4em;
+    width: 100%;
+  }
+  .stat-left { flex: 0 0 auto; }
+  .stat-number {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(70px, 9vw, 130px);
+    line-height: 1;
+    color: var(--terracotta);
+  }
+  .stat-stars {
+    margin-top: 0.25em;
+    font-size: clamp(16px, 1.6vw, 22px);
+    letter-spacing: 2px;
+    color: var(--terracotta-tint);
+  }
+  .stat-caption {
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.15vw, 17px);
+    line-height: 1.55;
+    color: var(--grey-light);
+    max-width: 320px;
+    margin-top: 0.7em;
+  }
+  .stat-caption strong { color: var(--terracotta-tint); }
+  .data-period {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.9vw, 13px);
+    color: var(--grey-light);
+    margin-top: -0.9em;
+    margin-bottom: 1.1em;
+  }
+
+  .bar-block { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.65em; }
+  .bar-row { display: flex; align-items: center; gap: 0.9em; }
+  .bar-row .bar-label {
+    flex: 0 0 3.4em;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(12.5px, 1vw, 15px);
+    color: var(--grey-light);
+    text-align: right;
+  }
+  .bar-track {
+    flex: 1;
+    height: clamp(16px, 2.6vw, 26px);
+    background: rgba(255,255,255,0.06);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--terracotta-dark), var(--terracotta));
+    border-radius: 6px;
+  }
+  .bar-row .bar-count {
+    flex: 0 0 2.6em;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: clamp(12.5px, 1vw, 15px);
+    color: var(--white);
+  }
+  @media (orientation: portrait) {
+    .stat-row { flex-direction: column; align-items: flex-start; gap: 1.5em; }
+    .stat-caption { max-width: 100%; }
+    .bar-block { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="slide" data-slide="7" data-total="19">
+  <div class="slide-customer-name">Klippen Hotel</div>
+  <div class="slide-label">Det siger jeres gæster</div>
+  <div class="data-period">Data dækker perioden 29. marts 2021 til 3. august 2026</div>
+  <h1 class="slide-headline">146 anmeldelser, <span class="accent">4,44</span> i snit på Google</h1>
+
+  <div class="stat-row">
+    <div class="stat-left">
+      <div class="stat-number">4,44</div>
+      <div class="stat-stars">★★★★☆</div>
+      <p class="stat-caption">Og næsten hver anden anmeldelse med tekst nævner det samme: <strong>udsigten over Østersøen og Gudhjem</strong> — på tværs af dansk, tysk, svensk, engelsk, fransk og polsk.</p>
+    </div>
+    <div class="bar-block">
+      <div class="bar-row"><div class="bar-label">5 ★</div><div class="bar-track"><div class="bar-fill" style="width: 100%;"></div></div><div class="bar-count">92</div></div>
+      <div class="bar-row"><div class="bar-label">4 ★</div><div class="bar-track"><div class="bar-fill" style="width: 42.4%;"></div></div><div class="bar-count">39</div></div>
+      <div class="bar-row"><div class="bar-label">3 ★</div><div class="bar-track"><div class="bar-fill" style="width: 8.7%;"></div></div><div class="bar-count">8</div></div>
+      <div class="bar-row"><div class="bar-label">2 ★</div><div class="bar-track"><div class="bar-fill" style="width: 1.1%;"></div></div><div class="bar-count">1</div></div>
+      <div class="bar-row"><div class="bar-label">1 ★</div><div class="bar-track"><div class="bar-fill" style="width: 6.5%;"></div></div><div class="bar-count">6</div></div>
+    </div>
+  </div>
+
+  <div class="slide-footer">Det Mindre Bureau</div>
+  <div class="slide-pagination">7 / 19</div>
+</div>
+
+</body>
+</html>

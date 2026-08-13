@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klippen Hotel — Værdien af 1.000 kunder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="slide-base.css">
+<style>
+  .slide.value-slide {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4vw;
+  }
+  .value-text { flex: 1; min-width: 0; }
+  .stat-number {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(56px, 6vw, 100px);
+    line-height: 1;
+    color: var(--terracotta);
+    margin-top: 0.05em;
+  }
+  .stat-caption {
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.15vw, 18px);
+    line-height: 1.5;
+    color: var(--grey-light);
+    max-width: 560px;
+    margin-top: 0.4em;
+  }
+  .slide .slide-list { margin-top: 0.8em; gap: 0.4em; }
+  .value-img {
+    flex-shrink: 0;
+    max-height: 82vh;
+    width: auto;
+    display: block;
+  }
+  @media (orientation: portrait) {
+    .slide.value-slide { flex-direction: column; gap: 24px; }
+    .value-img { max-height: 40vh; width: 100%; object-fit: contain; }
+  }
+</style>
+</head>
+<body>
+
+<div class="slide value-slide" data-slide="12" data-total="19">
+  <div class="slide-customer-name">Klippen Hotel</div>
+  <div class="value-text">
+    <div class="slide-label">Lad os regne på det sammen</div>
+    <div class="stat-number">1.000</div>
+    <p class="stat-caption">nye potentielle kunder. Hvad er det værd for præcis jer? Det tjekker vi live, ud fra jeres egne tal — ikke et gennemsnit fra et andet hotel.</p>
+
+    <ul class="slide-list build">
+      <li>Langt den største del køber ALDRIG et ophold hos jer</li>
+      <li>Hvis du nurser resten over 3, 6, 12 og 24 måneder vil en andel booke</li>
+      <li>Når du giver <span style="color: var(--terracotta-tint); letter-spacing: 1px;">★★★★★</span> oplevelser, kommer en andel igen</li>
+      <li>En andel forbliver gæster i årevis</li>
+      <li>Og hvis du er heldig, anbefaler de dig til andre</li>
+    </ul>
+  </div>
+  <img class="value-img" src="billeder/vaerdiberegner-standard.png" alt="Værdiberegneren — mobilvisning af resultatet for kundens egne tal">
+
+  <div class="slide-footer">Det Mindre Bureau</div>
+  <div class="slide-pagination">12 / 19</div>
+</div>
+
+<script src="slide-reveal.js"></script>
+</body>
+</html>

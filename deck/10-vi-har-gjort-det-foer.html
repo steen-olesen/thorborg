@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klippen Hotel — Vi har gjort det før</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="slide-base.css">
+<style>
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.1vw 1.6vw;
+    margin-top: 1.5em;
+  }
+  @media (orientation: portrait) {
+    .stat-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  }
+  .stat-card-3 {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 1.15em 1.2em;
+    text-align: center;
+  }
+  .stat-card-3.hero {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+  }
+  .stat-card-3 .num {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(26px, 2.5vw, 38px);
+    color: var(--terracotta);
+    line-height: 1;
+  }
+  .stat-card-3.hero .num { color: var(--white); }
+  .stat-card-3 .label {
+    font-family: var(--font-body);
+    font-size: clamp(11.5px, 0.9vw, 13px);
+    color: var(--grey-light);
+    line-height: 1.4;
+    margin-top: 0.6em;
+  }
+  .stat-card-3.hero .label { color: rgba(255,255,255,0.85); }
+  .stat-caption {
+    margin-top: 1.3em;
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.1vw, 15.5px);
+    color: var(--grey-light);
+  }
+  .stat-caption strong { color: var(--terracotta-tint); }
+</style>
+</head>
+<body>
+
+<div class="slide" data-slide="17" data-total="19">
+  <div class="slide-customer-name">Klippen Hotel</div>
+  <div class="slide-label">Vi har gjort det før</div>
+  <h1 class="slide-headline">Molskroen — samme metode, <span class="accent">10 dage</span></h1>
+
+  <div class="stat-row">
+    <div class="stat-card-3 hero">
+      <div class="num">19.636</div>
+      <div class="label">besøgende på<br>tilmeldingssiden</div>
+    </div>
+    <div class="stat-card-3 hero">
+      <div class="num">7.610</div>
+      <div class="label">deltagere i<br>konkurrencen</div>
+    </div>
+    <div class="stat-card-3">
+      <div class="num">3.600</div>
+      <div class="label">deltagere henvist<br>af andre deltagere</div>
+    </div>
+    <div class="stat-card-3">
+      <div class="num">2.327</div>
+      <div class="label">personer delte<br>konkurrencen selv</div>
+    </div>
+    <div class="stat-card-3">
+      <div class="num">12.026</div>
+      <div class="label">gratis besøgende,<br>skabt via delinger</div>
+    </div>
+    <div class="stat-card-3">
+      <div class="num">4.503</div>
+      <div class="label">nye tilmeldinger<br>til nyhedsbrevet</div>
+    </div>
+  </div>
+
+  <p class="stat-caption">Med kun <strong>kr. 2.000</strong> i annoncebudget og <strong>kr. 2.000</strong> i samlet præmieværdi — og dét var med bare 1 præmie. Næste gang: 4.</p>
+
+  <div class="slide-footer">Det Mindre Bureau</div>
+  <div class="slide-pagination">17 / 19</div>
+</div>
+
+</body>
+</html>

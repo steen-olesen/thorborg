@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klippen Hotel — Jeres univers (2/2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="slide-base.css">
+<style>
+  .asset-grid {
+    margin-top: 1.8em;
+    max-width: 94%;
+  }
+  .asset-list {
+    list-style: none;
+    column-count: 2;
+    column-gap: 4vw;
+  }
+  @media (orientation: portrait) {
+    .asset-grid { max-width: 100%; }
+    .asset-list { column-count: 1; }
+  }
+  .asset-list li {
+    font-family: var(--font-body);
+    font-size: clamp(15px, 1.15vw, 17.5px);
+    line-height: 1.5;
+    padding-left: 1.6em;
+    position: relative;
+    color: var(--white);
+    margin-bottom: 0.9em;
+    break-inside: avoid;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .asset-list li.pending { opacity: 0; transform: translateY(10px); }
+  .asset-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: var(--terracotta);
+  }
+</style>
+</head>
+<body>
+
+<div class="slide" data-slide="4" data-total="19">
+  <div class="slide-customer-name">Klippen Hotel</div>
+  <div class="slide-label">Jeres univers</div>
+  <h1 class="slide-headline">I har allerede <span class="accent">rækkevidden</span></h1>
+
+  <div class="asset-grid">
+    <ul class="asset-list build">
+      <li>6.100+ følgere samlet — Facebook (3.700) og Instagram (2.416)</li>
+      <li>Et opslag for nylig fik 39 reaktioner, 9 kommentarer og 1 deling på under en uge</li>
+      <li>Flersproget hjemmeside (dansk/engelsk/tysk) — matcher jeres brede, internationale gæstebase</li>
+      <li>I kører allerede en månedlig nyhedsbrevs-lodtrækning om et ophold for 2 — gæsterne er vant til at tilmelde sig</li>
+      <li>Organiserede Instagram-highlights (Morgenmad, Restaurant, Efterår, Renovering, Klippen By)</li>
+      <li>Konsistent visuelt brand — cremet og terracotta, roligt og nordisk-minimalistisk</li>
+    </ul>
+  </div>
+
+  <div class="slide-footer">Det Mindre Bureau</div>
+  <div class="slide-pagination">4 / 19</div>
+</div>
+
+<script src="slide-reveal.js"></script>
+</body>
+</html>

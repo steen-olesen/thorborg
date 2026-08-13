@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klippen Hotel — Tilmeldingssiden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="slide-base.css">
+<style>
+  .slide.signup-slide {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 4vw;
+  }
+  .signup-text {
+    flex: 0 0 34%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .signup-text .slide-headline { max-width: 100%; }
+  .signup-text .slide-body { margin-top: 0.8em; }
+  .signup-img-wrap {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .signup-img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  @media (orientation: portrait) {
+    .slide.signup-slide { flex-direction: column; gap: 20px; }
+    .signup-img-wrap { flex: 0 1 auto; max-height: 48vh; }
+    .signup-img { max-height: 48vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="slide signup-slide" data-slide="15" data-total="19">
+  <div class="slide-customer-name">Klippen Hotel</div>
+  <div class="signup-text">
+    <div class="slide-label">Sådan ser det ud</div>
+    <h1 class="slide-headline">Og sådan møder gæsten <span class="accent">konkurrencen</span></h1>
+    <p class="slide-body">Det her er tilmeldingssiden, gæsterne rent faktisk ser. Resten af materialet gennemgår vi live.</p>
+  </div>
+  <div class="signup-img-wrap">
+    <img class="signup-img" src="billeder/tilmelding-phone-mockup.png" alt="Tilmeldingssiden vist på mobil">
+  </div>
+
+  <div class="slide-footer">Det Mindre Bureau</div>
+  <div class="slide-pagination">15 / 19</div>
+</div>
+
+</body>
+</html>

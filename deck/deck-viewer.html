@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klippen Hotel — Strategy Session</title>
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --terracotta: #C4581E;
+    --terracotta-tint: #E8B49A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; background: #000; overflow: hidden; }
+  body { font-family: -apple-system, 'Segoe UI', sans-serif; }
+
+  #stage { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+
+  .frame-wrap { position: absolute; inset: 0; display: none; }
+  .frame-wrap.active { display: block; }
+  .frame-wrap iframe { width: 100%; height: 100%; border: none; background: var(--navy); }
+
+  #bottombar {
+    position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    z-index: 100; opacity: 0; transition: opacity 0.3s;
+  }
+  #bottombar.visible { opacity: 1; }
+
+  .nav-btn {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1.5px solid rgba(196,88,30,0.5);
+    background: rgba(13,27,42,0.85); color: var(--terracotta-tint);
+    font-size: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-btn:hover { background: var(--terracotta); color: white; }
+  .nav-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+
+  #dots { display: flex; gap: 6px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; }
+  .dot.active { background: var(--terracotta); width: 20px; border-radius: 4px; }
+
+  #fs-btn {
+    width: 34px; height: 34px; border-radius: 8px;
+    border: 1.5px solid rgba(196,88,30,0.4);
+    background: rgba(13,27,42,0.85); color: rgba(255,255,255,0.7); cursor: pointer;
+  }
+  #fs-btn:hover { border-color: var(--terracotta); color: var(--terracotta-tint); }
+
+  #counter {
+    position: fixed; top: 18px; right: 24px;
+    font-size: 12px; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);
+    z-index: 100; opacity: 0; transition: opacity 0.3s;
+  }
+  #counter.visible { opacity: 1; }
+
+  /* Kun synlig på touch (se hover:none-blokken nedenfor) — decket er bygget
+     til en 16:9-widescreen-oplevelse, og selvom mobil-reflowet nu virker
+     fint, får man stadig mest ud af det på desktop (tilføjet 2026-08-13,
+     efter brugerfeedback). */
+  #desktop-hint {
+    display: none;
+    position: fixed; top: 14px; left: 14px;
+    background: rgba(0,0,0,0.65); color: white;
+    font-family: -apple-system, 'Segoe UI', sans-serif; font-size: 11px;
+    padding: 6px 10px; border-radius: 5px;
+    z-index: 100;
+  }
+
+  #drawer-toggle {
+    position: fixed; right: 22px; bottom: 74px; width: 40px; height: 40px;
+    border-radius: 10px; border: 1.5px solid rgba(196,88,30,0.4);
+    background: rgba(13,27,42,0.9); color: rgba(255,255,255,0.7);
+    font-size: 16px; cursor: pointer; z-index: 200; opacity: 0;
+    transition: opacity 0.3s, border-color 0.2s, color 0.2s;
+  }
+  #drawer-toggle.visible { opacity: 1; }
+  #drawer-toggle:hover { border-color: var(--terracotta); color: var(--terracotta-tint); }
+
+  /* Touch-enheder har ingen hover, og taps inde i slidens iframe når aldrig
+     op til denne dokuments mousemove/click-listeners (iframe-grænsen stopper
+     event-bobling) — så "vis UI ved bevægelse/klik"-mekanikken kan aldrig
+     trigges der. Uden dette ville nav/dots/drawer være permanent usynlige
+     og ubrugelige på en telefon. Vis derfor altid UI'et på touch, og gør
+     targets lidt større til fingre (tilføjet 2026-08-12, efter
+     brugerfeedback om deling via Netlify til mobil-visning). */
+  @media (hover: none) {
+    #bottombar, #counter, #drawer-toggle { opacity: 1 !important; }
+    .nav-btn { width: 44px; height: 44px; }
+    #fs-btn { display: none; }
+    #drawer-toggle { width: 44px; height: 44px; bottom: 72px; }
+    #desktop-hint { display: block; }
+  }
+
+  #drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; width: 230px;
+    background: rgba(8,14,23,0.98); border-left: 1px solid rgba(196,88,30,0.25);
+    z-index: 300; transform: translateX(100%);
+    transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+    overflow-y: auto; padding: 54px 12px 20px;
+  }
+  #drawer.open { transform: translateX(0); }
+
+  #drawer-close {
+    position: fixed; top: 14px; right: 14px; width: 28px; height: 28px;
+    border-radius: 7px; border: 1px solid rgba(255,255,255,0.15);
+    background: transparent; color: rgba(255,255,255,0.5); cursor: pointer; z-index: 301;
+  }
+  #drawer-close:hover { color: white; border-color: rgba(255,255,255,0.4); }
+
+  .thumb-item { display: flex; align-items: center; gap: 10px; padding: 6px; border-radius: 8px; cursor: pointer; margin-bottom: 6px; }
+  .thumb-item:hover { background: rgba(196,88,30,0.12); }
+  .thumb-item.active { background: rgba(196,88,30,0.16); border: 1px solid rgba(196,88,30,0.4); }
+  .thumb-item.active .thumb-frame { border-color: var(--terracotta); }
+
+  .thumb-frame {
+    position: relative; width: 86px; height: 48px; flex-shrink: 0;
+    overflow: hidden; border-radius: 4px; border: 1px solid rgba(255,255,255,0.15); background: var(--navy);
+  }
+  .thumb-frame iframe {
+    position: absolute; top: 0; left: 0; width: 1600px; height: 900px;
+    transform: scale(0.05375); transform-origin: top left; border: none; pointer-events: none;
+  }
+
+  .thumb-num { font-size: 9px; font-weight: 700; letter-spacing: 0.05em; color: var(--terracotta-tint); }
+  .thumb-label { font-size: 10.5px; line-height: 1.3; color: rgba(255,255,255,0.65); margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <div class="frame-wrap active" data-label="Cover · MDM"><iframe src="01-cover.html"></iframe></div>
+  <div class="frame-wrap" data-build="true" data-label="Agenda"><iframe src="01b-agenda.html"></iframe></div>
+  <div class="frame-wrap" data-build="true" data-label="Jeres univers · tilliden"><iframe src="06-jeres-univers.html"></iframe></div>
+  <div class="frame-wrap" data-build="true" data-label="Jeres univers · rækkevidden"><iframe src="06e-jeres-univers-2.html"></iframe></div>
+  <div class="frame-wrap" data-build="true" data-label="Observationer"><iframe src="05-observationer.html"></iframe></div>
+  <div class="frame-wrap" data-label="Kundernes ord"><iframe src="04-kundernes-ord.html"></iframe></div>
+  <div class="frame-wrap" data-label="4,44 i snit"><iframe src="03-stat-5stjerner.html"></iframe></div>
+  <div class="frame-wrap" data-build="true" data-label="Hvorfor lytte til mig?"><iframe src="11b-hvorfor-mig.html"></iframe></div>
+  <div class="frame-wrap" data-build="true" data-label="I taber kunder hver måned"><iframe src="06a-nyt-blod.html"></iframe></div>
+  <div class="frame-wrap" data-build="true" data-label="Vigtigheden af en plan"><iframe src="06b-vigtigheden-af-en-plan.html"></iframe></div>
+  <div class="frame-wrap" data-label="Skillevejen"><iframe src="06c-skillevejen.html"></iframe></div>
+  <div class="frame-wrap" data-build="true" data-label="Værdien af 1.000 kunder"><iframe src="06d-vaerdien-af-1000-kunder.html"></iframe></div>
+  <div class="frame-wrap" data-label="Forslaget"><iframe src="07-forslaget.html"></iframe></div>
+  <div class="frame-wrap" data-label="4 præmier"><iframe src="08-fire-praemier.html"></iframe></div>
+  <div class="frame-wrap" data-label="Tilmeldingssiden"><iframe src="08a-tilmelding.html"></iframe></div>
+  <div class="frame-wrap" data-label="Gamification"><iframe src="09-gamification.html"></iframe></div>
+  <div class="frame-wrap" data-label="Vi har gjort det før"><iframe src="10-vi-har-gjort-det-foer.html"></iframe></div>
+  <div class="frame-wrap" data-label="BOOOST Metoden"><iframe src="11-metode-oversigt.html"></iframe></div>
+  <div class="frame-wrap" data-label="Næste skridt...?"><iframe src="12-naeste-skridt.html"></iframe></div>
+</div>
+
+<div id="counter"></div>
+<div id="desktop-hint">Opleves bedst på desktop</div>
+
+<div id="bottombar">
+  <button class="nav-btn" id="prev">&#8592;</button>
+  <div id="dots"></div>
+  <button class="nav-btn" id="next">&#8594;</button>
+  <button id="fs-btn" title="Fuldskærm (F)">&#9974;</button>
+</div>
+
+<button id="drawer-toggle" title="Alle slides">&#9776;</button>
+
+<div id="drawer">
+  <button id="drawer-close">&times;</button>
+  <div id="thumb-list"></div>
+</div>
+
+<script>
+  const wraps = [...document.querySelectorAll('.frame-wrap')];
+  const dotsEl = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  const bar = document.getElementById('bottombar');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+
+  wraps.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+  const dots = [...dotsEl.children];
+
+  const thumbList = document.getElementById('thumb-list');
+  const drawer = document.getElementById('drawer');
+  const drawerToggle = document.getElementById('drawer-toggle');
+
+  wraps.forEach((w, i) => {
+    const src = w.querySelector('iframe').getAttribute('src');
+    const label = w.dataset.label || src.replace('.html', '').replace(/^\d+-/, '').replace(/-/g, ' ');
+    const item = document.createElement('div');
+    item.className = 'thumb-item' + (i === 0 ? ' active' : '');
+    item.innerHTML =
+      '<div class="thumb-frame"><iframe src="' + src + '"></iframe></div>' +
+      '<div><div class="thumb-num">' + (i + 1) + '</div><div class="thumb-label">' + label + '</div></div>';
+    item.addEventListener('click', () => { goTo(i); closeDrawer(); });
+    thumbList.appendChild(item);
+  });
+  const thumbs = [...thumbList.children];
+
+  function openDrawer() { drawer.classList.add('open'); }
+  function closeDrawer() { drawer.classList.remove('open'); }
+  drawerToggle.addEventListener('click', openDrawer);
+  document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+
+  let current = Math.max(0, Math.min(wraps.length - 1, parseInt(location.hash.slice(1), 10) - 1 || 0));
+
+  function render() {
+    wraps.forEach((w, i) => w.classList.toggle('active', i === current));
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
+    thumbs[current].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    counter.textContent = (current + 1) + ' / ' + wraps.length;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === wraps.length - 1;
+    history.replaceState(null, '', '#' + (current + 1));
+  }
+
+  function goTo(i) {
+    if (i < 0 || i >= wraps.length) return;
+    current = i;
+    render();
+  }
+
+  // "Næste" spørger først sliden om der er flere punkter at afsløre —
+  // kun slides med data-build="true" svarer på det; alle andre skifter med det samme.
+  function tryNext() {
+    const wrap = wraps[current];
+    if (wrap.dataset.build === 'true') {
+      wrap.querySelector('iframe').contentWindow.postMessage({ type: 'try-advance' }, '*');
+    } else {
+      goTo(current + 1);
+    }
+  }
+
+  window.addEventListener('message', e => {
+    if (e.data && e.data.type === 'advance-slide') goTo(current + 1);
+  });
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', tryNext);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); tryNext(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+    if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  document.getElementById('fs-btn').addEventListener('click', toggleFullscreen);
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+
+  let uiTimer;
+  function showUI() {
+    bar.classList.add('visible');
+    counter.classList.add('visible');
+    drawerToggle.classList.add('visible');
+    clearTimeout(uiTimer);
+    uiTimer = setTimeout(() => {
+      bar.classList.remove('visible');
+      counter.classList.remove('visible');
+      drawerToggle.classList.remove('visible');
+    }, 2500);
+  }
+  document.addEventListener('mousemove', showUI);
+  document.addEventListener('click', showUI);
+
+  render();
+  showUI();
+</script>
+
+</body>
+</html>

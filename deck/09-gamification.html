@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klippen Hotel — Sådan optjener deltagerne point</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="slide-base.css">
+<style>
+  .group-wrap {
+    display: flex;
+    gap: 2vw;
+    margin-top: 1.6em;
+    align-items: stretch;
+  }
+  .group-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .group-left { flex: 0 0 36%; gap: 1.3em; }
+  .group-right { flex: 1; gap: 1em; }
+  @media (orientation: portrait) {
+    .group-wrap { flex-direction: column; gap: 1em; }
+    .group-left, .group-right { flex: 1 1 auto; }
+  }
+
+  .group-heading {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(13px, 1.1vw, 16px);
+    letter-spacing: 0.03em;
+    color: var(--terracotta-tint);
+    margin-bottom: 0.3em;
+  }
+
+  .point-card {
+    display: flex;
+    align-items: center;
+    gap: 1.1em;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 0.85em 1.3em;
+  }
+  .group-left .point-card {
+    flex: 1;
+    align-items: flex-start;
+    padding: 1.3em 1.6em;
+  }
+
+  .point-value {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(22px, 2.3vw, 30px);
+    color: var(--terracotta);
+    flex-shrink: 0;
+    min-width: 1.6em;
+    text-align: center;
+  }
+  .group-left .point-value { font-size: clamp(30px, 3.2vw, 42px); min-width: 1.3em; margin-top: 0.1em; }
+
+  .point-text {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.05vw, 15.5px);
+    line-height: 1.35;
+    color: var(--grey-light);
+  }
+  .point-text strong {
+    display: block;
+    color: var(--white);
+    font-size: clamp(14.5px, 1.2vw, 17.5px);
+    margin-bottom: 0.15em;
+  }
+  .group-left .point-text strong { font-size: clamp(18px, 1.6vw, 22px); margin-bottom: 0.25em; }
+  .group-left .point-text { font-size: clamp(14px, 1.15vw, 17px); line-height: 1.45; }
+</style>
+</head>
+<body>
+
+<div class="slide" data-slide="16" data-total="19">
+  <div class="slide-customer-name">Klippen Hotel</div>
+  <div class="slide-label">Mekanikken bag</div>
+  <h1 class="slide-headline">Sådan optjener deltagerne <span class="accent">point</span></h1>
+
+  <div class="group-wrap">
+    <div class="group-col group-left">
+      <div class="group-heading">Sådan kommer man i gang</div>
+      <div class="point-card">
+        <div class="point-value">100</div>
+        <div class="point-text">
+          <strong>Deltag i konkurrencen</strong>
+          Bare ved at tilmelde sig — ingen andre krav. Den letteste måde at komme i gang på.
+        </div>
+      </div>
+      <div class="point-card">
+        <div class="point-value">500</div>
+        <div class="point-text">
+          <strong>Hver ven, der også deltager</strong>
+          Del dit personlige henvisningslink. Ingen øvre grænse for, hvor mange point du kan samle.
+        </div>
+      </div>
+    </div>
+
+    <div class="group-col group-right">
+      <div class="group-heading">Flere måder at optjene point</div>
+      <div class="point-card">
+        <div class="point-value">500</div>
+        <div class="point-text"><strong>Kundeloyalitet</strong>Svar på NPS-spørgsmålet — hvor sandsynligt er det, du anbefaler os videre?</div>
+      </div>
+      <div class="point-card">
+        <div class="point-value">500</div>
+        <div class="point-text"><strong>Kundeadfærd</strong>Svar på hvor ofte du besøger os — stamgæst eller sjælden gæst?</div>
+      </div>
+      <div class="point-card">
+        <div class="point-value">500</div>
+        <div class="point-text"><strong>Kundeoprindelse</strong>Svar på hvor du hørte om os — hvilke kanaler bringer faktisk gæster ind?</div>
+      </div>
+      <div class="point-card">
+        <div class="point-value">100</div>
+        <div class="point-text"><strong>"Skjult marketing"</strong>Retorisk spørgsmål der reelt er markedsføring i forklædning, fx "har vi Honesty Bar?"</div>
+      </div>
+      <div class="point-card">
+        <div class="point-value">100</div>
+        <div class="point-text"><strong>Like &amp; følg</strong>På Facebook og Instagram — nemt point, større rækkevidde til jer</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">Det Mindre Bureau</div>
+  <div class="slide-pagination">16 / 19</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,341 @@
+/* ==========================================================================
+   Slide-base — fælles design-system til BOOOST/hospitality-slides
+   Kilde: 02-Voice-og-Style-Guide/farve-og-typografi-note.md
+   Ret IKKE farver/fonte i de enkelte slide-filer — ret her, så alle slides følger med.
+
+   Ingen farve-emoji (⭐️, ✅, ➡️ osv.) som visuelle elementer i slide-indhold —
+   brug altid almindelige Unicode-tegn (★, ✓, →) farvet med variablerne herunder
+   (--terracotta / --terracotta-tint). Farve-emoji har egen fastlåst farve og
+   bryder paletten (rettet 2026-08-09, fundet i 13-vaerdien-af-1000-kunder.html).
+   ========================================================================== */
+
+:root {
+  --navy: #0D1B2A;
+  --terracotta: #C4581E;
+  --terracotta-dark: #9E4315;
+  --terracotta-tint: #E8B49A;
+  --cream: #F5F0E8;
+  --grey: #5C6B7A;
+  --grey-light: rgba(255, 255, 255, 0.55);
+  --white: #FFFFFF;
+
+  --font-display: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-body);
+}
+
+/* 16:9 slide, letterboxed og centreret — virker i browser-vindue og fullscreen */
+.slide {
+  position: relative;
+  width: min(100vw, 177.78vh);
+  height: min(100vh, 56.25vw);
+  background: var(--navy);
+  color: var(--white);
+  overflow: hidden;
+  padding: 7vh 7vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Lille sporet label over overskriften — fx "PROBLEMET", "OPSKRIFTEN" */
+.slide-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(11px, 1vw, 14px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 1.4em;
+}
+
+/* Overskrift — Poppins Black, dramatisk */
+.slide-headline {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(30px, 4.4vw, 58px);
+  line-height: 1.15;
+  color: var(--white);
+  max-width: 90%;
+}
+
+.slide-headline .accent {
+  color: var(--terracotta);
+}
+
+/* Brødtekst / underoverskrift — rolig grå */
+.slide-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(15px, 1.3vw, 20px);
+  line-height: 1.65;
+  color: var(--grey-light);
+  max-width: 640px;
+  margin-top: 1.2em;
+}
+
+/* Punktliste-stil — bruges i problem/opskrift-slides */
+.slide-list {
+  list-style: none;
+  margin-top: 1.6em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9em;
+  max-width: 720px;
+}
+
+.slide-list li {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.25vw, 19px);
+  line-height: 1.5;
+  color: var(--white);
+  padding-left: 1.5em;
+  position: relative;
+}
+
+.slide-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--terracotta);
+}
+
+.slide-list li strong {
+  color: var(--terracotta-tint);
+  font-weight: 600;
+}
+
+/* Punkt-for-punkt-visning — kræver klassen "build" på <ul> + slide-reveal.js */
+.slide-list.build li {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.slide-list.build li.pending {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* Brand-footer nederst i hjørnet på hver slide */
+.slide-footer {
+  position: absolute;
+  bottom: 5vh;
+  left: 7vw;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Billede-slide — ét eller to billeder centreret, med billedtekst under */
+.slide.image-slide {
+  align-items: center;
+  text-align: center;
+}
+
+.slide.image-slide .slide-headline,
+.slide.image-slide .slide-label {
+  text-align: center;
+}
+
+.image-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3vw;
+  margin-top: 1.4em;
+}
+
+.slide-image {
+  display: block;
+  max-height: 44vh;
+  max-width: 100%;
+}
+
+.slide-image-caption {
+  text-align: center;
+  max-width: 640px;
+  margin: 1.3em auto 0;
+}
+
+/* Embed-slide — indlejret side (fx en beregner) via iframe, fylder det meste af sliden */
+.slide.embed-slide {
+  align-items: stretch;
+}
+
+.embed-frame {
+  flex: 1;
+  margin-top: 1.2em;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.embed-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Bio-slide — portræt i siden + navn/rolle/tekst (til "om mig"-slides) */
+.slide.bio-slide {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5vw;
+}
+
+.bio-photo {
+  flex-shrink: 0;
+  width: clamp(320px, 36vw, 520px);
+  aspect-ratio: 3 / 4;
+  height: auto;
+  object-fit: cover;
+}
+
+.bio-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.bio-text .slide-headline {
+  max-width: 100%;
+}
+
+.bio-role {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(14px, 1.15vw, 17px);
+  color: var(--terracotta-tint);
+  margin-top: 0.4em;
+}
+
+/* Sidetal nederst til højre (valgfri, sæt via data-slide/data-total i HTML) */
+.slide-pagination {
+  position: absolute;
+  bottom: 5vh;
+  right: 7vw;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Kundens navn — diskret, øverst midtfor på hver slide. Kræver Inter-vægt 300 i
+   Google Fonts-linket (wght@300;400;500;600). Kun markup (customer-specific)
+   tilføjes i Kunder-mapperne, ALDRIG en fast kundenavns-tekst her i masteren.
+   NB: skriv aldrig et bogstaveligt "Kunder/​*​/deck/"-stimønster inde i en
+   CSS-kommentar — den midterste "*​/" lukker kommentaren for tidligt og fik
+   et preview-værktøj til at droppe resten af filen (fundet 2026-08-07). */
+.slide-customer-name {
+  position: absolute;
+  top: 4.5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(11px, 1vw, 14px);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ==========================================================================
+   Mobil-reflow — portræt-telefoner/tablets. Forlader det låste 16:9-format
+   og lader hver slide fylde skærmen naturligt i stedet (tilføjet 2026-08-12,
+   efter brugerfeedback: decket var ulæseligt på telefon, fordi 16:9-boksen
+   blev klemt ned til en ca. 220px høj stribe midt på en portræt-skærm, med
+   vh/vw-baseret padding der samtidig overfløj boksens egen, meget mindre
+   højde).
+   Per-slide to-kolonne/grid-layouts (værdi, blueprint, tilmelding-embed,
+   4 præmier, gamification, skillevejen, jeres univers, stat-slides osv.) har
+   deres EGEN tilsvarende @media-blok nederst i deres egen <style> — denne
+   blok her dækker kun de fælles klasser fra selve dette dokument.
+   ========================================================================== */
+@media (orientation: portrait) {
+  html, body {
+    height: auto;
+    min-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  body {
+    display: block;
+  }
+  .slide {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding: 32px 24px 48px;
+    justify-content: flex-start;
+  }
+  .slide > * {
+    min-width: 0;
+  }
+  .slide-headline {
+    font-size: clamp(26px, 7.5vw, 36px);
+    max-width: 100%;
+  }
+  .slide-body {
+    font-size: 16px;
+    max-width: 100%;
+  }
+  .slide-list {
+    max-width: 100%;
+  }
+  .slide-list li {
+    font-size: 15px;
+  }
+  .slide-footer,
+  .slide-pagination {
+    position: static;
+    display: block;
+    margin-top: 24px;
+  }
+  .slide-pagination {
+    margin-top: 4px;
+  }
+  .slide-customer-name {
+    position: static;
+    transform: none;
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .slide.bio-slide {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .bio-photo {
+    width: 100%;
+    max-width: 240px;
+    aspect-ratio: 3 / 4;
+    margin: 0 auto;
+  }
+  .slide.image-slide .image-row {
+    flex-direction: column;
+  }
+  .slide-image {
+    max-height: 32vh;
+  }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klippen Hotel — BOOOST Metoden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="slide-base.css">
+<style>
+  .slide.blueprint {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 4vw;
+  }
+  .blueprint-text {
+    flex: 0 0 30%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .blueprint-text .slide-headline { max-width: 100%; }
+  .blueprint-img-wrap {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .blueprint-img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    display: block;
+  }
+  @media (orientation: portrait) {
+    .slide.blueprint { flex-direction: column; gap: 20px; }
+    .blueprint-img-wrap { flex: 0 1 auto; max-height: 50vh; }
+    .blueprint-img { max-height: 50vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="slide blueprint" data-slide="18" data-total="19">
+  <div class="slide-customer-name">Klippen Hotel</div>
+  <div class="blueprint-text">
+    <div class="slide-label">Det I lige har set, er ikke gæt</div>
+    <h1 class="slide-headline">Det hele er bygget på <span class="accent">BOOOST Metoden</span></h1>
+  </div>
+  <div class="blueprint-img-wrap">
+    <img class="blueprint-img" src="billeder/booost-blueprint-engagement.png" alt="BOOOST Blueprint — modul 02 Engagement fremhævet (trin 4-6)">
+  </div>
+
+  <div class="slide-footer">Det Mindre Bureau</div>
+  <div class="slide-pagination">18 / 19</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klippen Hotel — Jeres univers (1/2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="slide-base.css">
+<style>
+  .asset-grid {
+    margin-top: 1.8em;
+    max-width: 94%;
+  }
+  .asset-list {
+    list-style: none;
+    column-count: 2;
+    column-gap: 4vw;
+  }
+  @media (orientation: portrait) {
+    .asset-grid { max-width: 100%; }
+    .asset-list { column-count: 1; }
+  }
+  .asset-list li {
+    font-family: var(--font-body);
+    font-size: clamp(15px, 1.15vw, 17.5px);
+    line-height: 1.5;
+    padding-left: 1.6em;
+    position: relative;
+    color: var(--white);
+    margin-bottom: 0.9em;
+    break-inside: avoid;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .asset-list li.pending { opacity: 0; transform: translateY(10px); }
+  .asset-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: var(--terracotta);
+  }
+</style>
+</head>
+<body>
+
+<div class="slide" data-slide="3" data-total="19">
+  <div class="slide-customer-name">Klippen Hotel</div>
+  <div class="slide-label">Jeres univers</div>
+  <h1 class="slide-headline">I har allerede <span class="accent">tilliden</span></h1>
+
+  <div class="asset-grid">
+    <ul class="asset-list build">
+      <li>4,44 i gennemsnit på Google — 92 af 146 anmeldelser er 5 stjerner</li>
+      <li>100% svarprocent, 0,8 dages gennemsnitlig svartid — I svarer på praktisk talt alt, og hurtigt</li>
+      <li>Udsigten nævnes i stort set hver eneste anmeldelse — jeres klareste, mest genkendelige styrke</li>
+      <li>Café Plateaus morgenmad og brunch omtales gentagne gange som "Bornholms bedste"</li>
+      <li>Personalet nævnes ved navn — Thomas, Maiken, Barbara &amp; Edvard, Fru Thorborg</li>
+      <li>Honesty Bar — et unikt, tillidsbaseret touch der adskiller jer fra de fleste andre hoteller</li>
+    </ul>
+  </div>
+
+  <div class="slide-footer">Det Mindre Bureau</div>
+  <div class="slide-pagination">3 / 19</div>
+</div>
+
+<script src="slide-reveal.js"></script>
+</body>
+</html>

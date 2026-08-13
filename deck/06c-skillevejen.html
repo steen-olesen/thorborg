@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klippen Hotel — Skillevejen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="slide-base.css">
+<style>
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4vw;
+    margin-top: 1em;
+    max-width: 90%;
+  }
+  @media (orientation: portrait) {
+    .compare-grid { grid-template-columns: 1fr; max-width: 100%; gap: 2em; }
+  }
+  .compare-col h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(13px, 1.1vw, 16px);
+    letter-spacing: 0.04em;
+    color: var(--grey-light);
+    margin-bottom: 0.9em;
+  }
+  .compare-col.win h3 { color: var(--terracotta-tint); }
+  .compare-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5em; }
+  .compare-col li {
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.15vw, 17px);
+    line-height: 1.5;
+    padding-left: 1.6em;
+    position: relative;
+    color: var(--grey-light);
+  }
+  .compare-col.win li { color: var(--white); }
+  .compare-col li::before {
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+  .compare-col:not(.win) li::before { content: '–'; color: rgba(255,255,255,0.3); }
+  .compare-col.win li::before { content: '✓'; color: var(--terracotta); }
+  .slide .slide-label { margin-bottom: 0.9em; }
+</style>
+</head>
+<body>
+
+<div class="slide" data-slide="11" data-total="19">
+  <div class="slide-customer-name">Klippen Hotel</div>
+  <div class="slide-label">Skillevejen</div>
+  <h1 class="slide-headline">I har <span class="accent">to muligheder</span> herfra</h1>
+
+  <div class="compare-grid">
+    <div class="compare-col">
+      <h3>Fortsætte som nu</h3>
+      <ul>
+        <li>Det der virker i dag, fortsætter — men i samme tempo</li>
+        <li>Vækst afhænger af, hvad der sker organisk</li>
+        <li>Ingen ny løftestang for at accelerere</li>
+      </ul>
+    </div>
+    <div class="compare-col win">
+      <h3>Tilføje BOOOST</h3>
+      <ul>
+        <li>Et lag ovenpå det I allerede gør godt</li>
+        <li>Et system der trækker nye gæster ind, måned efter måned</li>
+        <li>Mere kontrol over hvornår væksten sker — ikke bare hvis</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slide-footer">Det Mindre Bureau</div>
+  <div class="slide-pagination">11 / 19</div>
+</div>
+
+</body>
+</html>
