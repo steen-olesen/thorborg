@@ -1,6 +1,16 @@
-const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+import { createClient } from 'redis';
+
 const HITS_KEY = 'klippen_hits';
+let clientPromise;
+
+function getClient() {
+  if (!clientPromise) {
+    const client = createClient({ url: process.env.dmb_REDIS_URL });
+    client.on('error', (err) => console.error('Redis error', err));
+    clientPromise = client.connect().then(() => client);
+  }
+  return clientPromise;
+}
 
 export default async function handler(req, res) {
   const { ver = '', deck = '', slide = '', total = '', label = '' } = req.query;
@@ -19,9 +29,13 @@ export default async function handler(req, res) {
 
   console.log(JSON.stringify(hit));
 
-  if (KV_URL && KV_TOKEN) {
-    const url = `${KV_URL}/lpush/${HITS_KEY}/${encodeURIComponent(JSON.stringify(hit))}`;
-    await fetch(url, { headers: { Authorization: `Bearer ${KV_TOKEN}` } }).catch(() => {});
+  if (process.env.dmb_REDIS_URL) {
+    try {
+      const client = await getClient();
+      await client.lPush(HITS_KEY, JSON.stringify(hit));
+    } catch (err) {
+      console.error('Failed to write hit to Redis', err);
+    }
   }
 
   res.setHeader('Cache-Control', 'no-store');
