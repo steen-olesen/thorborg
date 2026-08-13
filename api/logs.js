@@ -16,13 +16,7 @@ export default async function handler(req, res) {
   const secret = process.env.LOGS_SECRET;
 
   if (!secret || req.query.key !== secret) {
-    res.status(404).json({
-      debug: true,
-      hasSecret: !!secret,
-      secretLen: secret ? secret.length : 0,
-      providedLen: (req.query.key || '').length,
-      hasRedisUrl: !!process.env.dmb_REDIS_URL
-    });
+    res.status(404).end();
     return;
   }
 
